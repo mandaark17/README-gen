@@ -9,15 +9,40 @@ function init() {
   .prompt([{
     type: 'input',
     name: 'title',
-    message: 'Enter the title of your project:',
+    message: 'WHAT IS THE TITLE',
   },
   {
     type: 'input',
     name: 'description',
-    message: 'Enter a description of your project:',
+    message: 'WHAT DOES THIS DO?',
+  },
+  {
+    type: 'input',
+    name: 'installation',
+    message: 'HOW TO INSTALL?',
+  },
+  {
+    type: 'input',
+    name: 'usage',
+    message: 'HOW DO THEY USE?',
+  },
+  {
+    type: 'input',
+    name: 'license',
+    message: 'ENTER LICENSE NAME(s).',
+  },
+  {
+    type: 'input',
+    name: 'contributors',
+    message: 'ENTER CONTRIBUTOR(s).',
+  },
+  {
+    type: 'input',
+    name: 'tests',
+    message: 'ENTER TEST(s)',
   }])
   
-  // Generate the README content by combining the user's answers
+// Generate the README content by combining the user's answers
   .then((answers) => {    
     const readmeContent = `# ${answers.title}\n\n` +
       `## Description\n\n${answers.description}\n\n` +
@@ -27,23 +52,22 @@ function init() {
       `- [License](#license)\n` +
       `- [Contributing](#contributing)\n` +
       `- [Tests](#tests)\n` +
-      `- [Questions](#questions)\n\n` +
       `## Installation\n\n` +
-      `<!-- Add installation instructions -->\n\n` +
+      `${answers.installation}\n\n` +
       `## Usage\n\n` +
-      `<!-- Add usage information -->\n\n` +
+      `${answers.usage}\n\n` +
       `## License\n\n` +
-      `<!-- Add license badge and notice -->\n\n` +
+      `${answers.license}\n\n` +
       `## Contributing\n\n` +
-      `<!-- Add contributing guidelines -->\n\n` +
+      `${answers.contributors}\n\n` +
       `## Tests\n\n` +
-      `<!-- Add test instructions -->\n\n` +
+      `${answers.tests}\n\n` +
       `## Questions\n\n` +
       `For any questions or inquiries, please contact me via:\n\n` +
-      `GitHub: [${answers.githubUsername}](https://github.com/${answers.githubUsername})\n\n` +
-      `Email: ${answers.email}\n`;
+      `GitHub: [mandaark17](https://github.com/mandaark17)\n\n` +
+      `Email: mandaark17@yahoo.com\n`;
 
-    // Write the generated README content to a file
+// Write the generated README content to a file
     fs.writeFile('README.md', readmeContent, 'utf8', (err) => {
       if (err) {
         console.error('Error writing README file:', err);
@@ -56,6 +80,5 @@ function init() {
     console.error('Error occurred:', error);
   });
 }
-
 
 init();
