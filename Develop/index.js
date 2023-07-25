@@ -1,8 +1,8 @@
-// TODO: Include packages needed for this application
+// Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-// TODO: Create an array of questions for user input
+// Create an array of questions for user input
 inquirer
   .prompt([{
     type: 'input',
@@ -13,10 +13,46 @@ inquirer
     type: 'input',
     name: 'description',
     message: 'Enter a description of your project:',
-  }]);
+  }])
+  
+  // Generate the README content by combining the user's answers
+  .then((answers) => {    
+    const readmeContent = `# ${answers.title}\n\n` +
+      `## Description\n\n${answers.description}\n\n` +
+      `## Table of Contents\n\n` +
+      `- [Installation](#installation)\n` +
+      `- [Usage](#usage)\n` +
+      `- [License](#license)\n` +
+      `- [Contributing](#contributing)\n` +
+      `- [Tests](#tests)\n` +
+      `- [Questions](#questions)\n\n` +
+      `## Installation\n\n` +
+      `<!-- Add installation instructions -->\n\n` +
+      `## Usage\n\n` +
+      `<!-- Add usage information -->\n\n` +
+      `## License\n\n` +
+      `<!-- Add license badge and notice -->\n\n` +
+      `## Contributing\n\n` +
+      `<!-- Add contributing guidelines -->\n\n` +
+      `## Tests\n\n` +
+      `<!-- Add test instructions -->\n\n` +
+      `## Questions\n\n` +
+      `For any questions or inquiries, please contact me via:\n\n` +
+      `GitHub: [${answers.githubUsername}](https://github.com/${answers.githubUsername})\n\n` +
+      `Email: ${answers.email}\n`;
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+    // Write the generated README content to a file
+    fs.writeFile('README.md', readmeContent, 'utf8', (err) => {
+      if (err) {
+        console.error('Error writing README file:', err);
+        return;
+      }
+      console.log('README.md generated successfully!');
+    });
+  })
+  .catch((error) => {
+    console.error('Error occurred:', error);
+  });
 
 // TODO: Create a function to initialize app
 function init() {}
