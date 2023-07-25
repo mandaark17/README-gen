@@ -3,7 +3,9 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 // Create an array of questions for user input
-inquirer
+
+function init() {
+  inquirer
   .prompt([{
     type: 'input',
     name: 'title',
@@ -53,9 +55,7 @@ inquirer
   .catch((error) => {
     console.error('Error occurred:', error);
   });
+}
 
-// TODO: Create a function to initialize app
-function init() {}
 
-// Function call to initialize app
 init();
